@@ -1,5 +1,5 @@
 import os
-
+from dotenv import load_dotenv
 from langchain.text_splitter import (
     CharacterTextSplitter,
     RecursiveCharacterTextSplitter,
@@ -11,6 +11,9 @@ from langchain.text_splitter import (
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
 from langchain_openai import AzureOpenAIEmbeddings
+
+
+load_dotenv()
 
 embeddings = AzureOpenAIEmbeddings(azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"], api_key=os.environ["AZURE_OPENAI_KEY"],
                                        openai_api_type="azure", azure_deployment="Embedding", show_progress_bar=True)
@@ -93,9 +96,10 @@ def query_vector_store(store_name, query):
         print(f"Vector Store {store_name} does not exists")
 
 
-#1
-query_vector_store(store_name="chorma_db_char", query="who is ron")
-#2
+# #1 character based query
+# query_vector_store(store_name="chorma_db_char", query="who is ron")
+# #2 sentence based query
+# query_vector_store(store_name="")
 
                                   
             
